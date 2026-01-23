@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import parse from './parser.js'
+import compare from './compare.js'
+import formatter from './formatter.js'
 
 const getPath = filepath => path.resolve(process.cwd(), filepath)
 
@@ -11,7 +13,7 @@ const readFile = (filepath) => {
   return readFileSync(path, 'utf-8')
 }
 
-const gendiff = (filepath1, filepath2, format) => {
+const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const fileData1 = readFile(filepath1)
   const fileData2 = readFile(filepath2)
 
@@ -20,6 +22,15 @@ const gendiff = (filepath1, filepath2, format) => {
 
   const data1 = parse(fileData1, ext1)
   const data2 = parse(fileData2, ext2)
+
+  const keys1 = Object.keys(data1)
+  const keys2 = Object.keys(data2)
+
+  const keysAll = [...new Set([...keys1, ...keys2])]
+
+  const dataDiff = compare(keysAll, data1, data2)
+
+  return formatter(dataDiff, format)
 }
 
 export default gendiff
