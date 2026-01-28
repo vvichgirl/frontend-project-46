@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import parse from './parser.js'
+import parse from './parsers.js'
 import compare from './compare.js'
 import formatter from './formatter.js'
 
@@ -29,6 +29,8 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const keysAll = [...new Set([...keys1, ...keys2])]
 
   const dataDiff = compare(keysAll, data1, data2)
+
+  dataDiff.sort((a, b) => a.key.localeCompare(b.key))
 
   return formatter(dataDiff, format)
 }
