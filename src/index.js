@@ -23,14 +23,7 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const data1 = parse(fileData1, ext1)
   const data2 = parse(fileData2, ext2)
 
-  const keys1 = Object.keys(data1)
-  const keys2 = Object.keys(data2)
-
-  const keysAll = [...new Set([...keys1, ...keys2])]
-
-  const dataDiff = compare(keysAll, data1, data2)
-
-  dataDiff.sort((a, b) => a.key.localeCompare(b.key))
+  const dataDiff = compare(data1, data2)
 
   return formatter(dataDiff, format)
 }

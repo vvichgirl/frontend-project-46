@@ -18,4 +18,4 @@ make install
 
 ### Demonstrations
 #### Report in stylish format (default)
-[![asciicast](https://asciinema.org/a/N09Je9J0Dh8rUnqp.svg)](https://asciinema.org/a/N09Je9J0Dh8rUnqpN)
+[![asciicast](https://asciinema.org/a/mvHl91VCqRfoTjO8.svg)](https://asciinema.org/a/mvHl91VCqRfoTjO8)
