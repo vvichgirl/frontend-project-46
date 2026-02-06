@@ -2,7 +2,7 @@ import path from 'node:path'
 import { dirname } from 'path'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'url'
-import { expect, test, beforeAll } from '@jest/globals'
+import { expect, test, beforeAll, describe } from '@jest/globals'
 import gendiff from '../src/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -11,22 +11,26 @@ const __dirname = dirname(__filename)
 const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
 const readFile = filename => readFileSync(getFixturePath(filename), 'utf-8')
 
-let resultStylish = ''
+let results = {}
 
 beforeAll(() => {
-  resultStylish = readFile('resultStylish.txt')
+  results = {
+    default: readFile('resultStylish.txt'),
+    stylish: readFile('resultStylish.txt'),
+    plain: readFile('resultPlain.txt'),
+  }
 })
 
-test('json stylish format', () => {
-  const path1 = getFixturePath('file1.json')
-  const path2 = getFixturePath('file2.json')
-  const actual = gendiff(path1, path2, 'stylish')
-  expect(actual).toEqual(resultStylish)
-})
+const formats = ['default', 'stylish', 'plain']
+const extensions = ['json', 'yaml']
 
-test('yaml stylish format', () => {
-  const path1 = getFixturePath('file1.yaml')
-  const path2 = getFixturePath('file2.yaml')
-  const actual = gendiff(path1, path2, 'stylish')
-  expect(actual).toEqual(resultStylish)
+describe.each(formats)('test %s format', (format) => {
+  test.each(extensions)(`test %s file`, (ext) => {
+    const path1 = getFixturePath(`file1.${ext}`)
+    const path2 = getFixturePath(`file2.${ext}`)
+
+    const actual = format === 'default' ? gendiff(path1, path2) : gendiff(path1, path2, format)
+
+    expect(actual).toEqual(results[format])
+  })
 })
