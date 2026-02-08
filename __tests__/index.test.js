@@ -18,10 +18,11 @@ beforeAll(() => {
     default: readFile('resultStylish.txt'),
     stylish: readFile('resultStylish.txt'),
     plain: readFile('resultPlain.txt'),
+    json: readFile('resultJson.json'),
   }
 })
 
-const formats = ['default', 'stylish', 'plain']
+const formats = ['default', 'stylish', 'plain', 'json']
 const extensions = ['json', 'yaml']
 
 describe.each(formats)('test %s format', (format) => {

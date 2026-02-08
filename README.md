@@ -22,3 +22,6 @@ make install
 
 #### Report in plain format
 [![asciicast](https://asciinema.org/a/IoXAK9okJEVFfZIx.svg)](https://asciinema.org/a/IoXAK9okJEVFfZIx)
+
+#### Report in json format
+[![asciicast](https://asciinema.org/a/ak8eQCjKnGQVgKXq.svg)](https://asciinema.org/a/ak8eQCjKnGQVgKXq)

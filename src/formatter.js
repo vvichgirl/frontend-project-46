@@ -7,6 +7,8 @@ const formatter = (dataDiff, format) => {
       return getOutputStylish(dataDiff)
     case 'plain':
       return getOutputPlain(dataDiff)
+    case 'json':
+      return JSON.stringify(dataDiff)
     default:
       throw new Error(`Unknown data format '${format}'`)
   }
