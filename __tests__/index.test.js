@@ -23,7 +23,7 @@ beforeAll(() => {
 })
 
 const formats = ['default', 'stylish', 'plain', 'json']
-const extensions = ['json', 'yaml']
+const extensions = ['json', 'yaml', 'yml']
 
 describe.each(formats)('test %s format', (format) => {
   test.each(extensions)(`test %s file`, (ext) => {
