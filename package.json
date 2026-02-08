@@ -13,6 +13,9 @@
   },
   "author": "Viktoriia Zubkova",
   "license": "ISC",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.34.0",
